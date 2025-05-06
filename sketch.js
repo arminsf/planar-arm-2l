@@ -32,3 +32,33 @@ function draw() {
   ang2 = aa[1];
   line(0, 0, al1*cos(ang1), al1*sin(ang1));
   line(al1*cos(ang1), 
+       al1*sin(ang1), 
+       al1*cos(ang1) + al2*cos(ang1+ang2), 
+       al1*sin(ang1) + al2*sin(ang1+ang2));
+  
+  stroke(0, 0, 0, 80)
+  aa = armAngles2(x, y, al1, al2);
+  ang1 = aa[0];
+  ang2 = aa[1];
+  line(0, 0, al1*cos(ang1), al1*sin(ang1));
+  line(al1*cos(ang1), 
+       al1*sin(ang1), 
+       al1*cos(ang1) + al2*cos(ang1+ang2), 
+       al1*sin(ang1) + al2*sin(ang1+ang2));
+}
+
+function armAngles(x, y, a, b) {
+  let r = sqrt(x*x + y*y);
+  let q2 = acos((r*r - a*a - b*b) / (2*a*b));
+  let q1 = atan2(y, x) - asin(b * sin(q2) / r);
+      
+  return [q1, q2];
+}
+
+function armAngles2(x, y, a, b) {
+  let r = sqrt(x*x + y*y);
+  let q2 = -acos((r*r - a*a - b*b) / (2*a*b));
+  let q1 = atan2(y, x) - asin(b * sin(q2) / r);
+      
+  return [q1, q2];
+}
